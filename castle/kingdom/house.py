@@ -35,13 +35,13 @@ class House:
         clockwise fashion
         """
         self._col_coor, self._row_coor = self.centre_coordinates
-        coors1 = (self._col_coor + House._beta, self._row_coor - 3 * House._alpha)
-        coors2 = (self._col_coor + 2 * House._beta, self._row_coor)
-        coors3 = (self._col_coor + House._beta, self._row_coor + 3 * House._alpha)
-        coors4 = (self._col_coor - House._beta, self._row_coor + 3 * House._alpha)
-        coors5 = (self._col_coor - 2 * House._beta, self._row_coor)
-        coors6 = (self._col_coor - House._beta, self._row_coor - 3 * House._alpha)
-        return [coors1, coors2, coors3, coors4, coors5, coors6]
+        coorse = (self._col_coor + House._beta, self._row_coor - 3 * House._alpha)
+        coorsd = (self._col_coor + 2 * House._beta, self._row_coor)
+        coorsc = (self._col_coor + House._beta, self._row_coor + 3 * House._alpha)
+        coorsz = (self._col_coor - House._beta, self._row_coor + 3 * House._alpha)
+        coorsa = (self._col_coor - 2 * House._beta, self._row_coor)
+        coorsq = (self._col_coor - House._beta, self._row_coor - 3 * House._alpha)
+        return [coorse, coorsd, coorsc, coorsz, coorsa, coorsq]
 
 
     def discover_neighbors(self, bt_instance):
@@ -58,3 +58,6 @@ class House:
         else:
             raise Exception("Generate centre_coordinate_to_house_mapping before building valid neighbors list")
         self.neighbors = cycle(self._neighbors)
+
+    def __repr__(self):
+        return "<House(centre_coordinates=)>" + str(self.centre_coordinates)

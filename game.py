@@ -38,7 +38,7 @@ while running:
         elif event.type == pygame.KEYDOWN:
             # When launched in full screen mode, use key
             # 'q' to quit
-            if event.key == pygame.K_q:
+            if event.key == pygame.K_ESCAPE:
                 running = False
             elif event.key == pygame.K_k:
                 # use k key to select a kill target
@@ -82,6 +82,7 @@ while running:
                     neighbor_coors = next(last_neighbor_operated_house.neighbors)
                     col_coor, row_coor = neighbor_coors
                     current_house = battleground.centre_coordinate_to_house_mapping.get((int(col_coor), int(row_coor)), current_house)
+
             elif event.key == pygame.K_RIGHT:
                 row_change = 0
                 col_change = 2 * House._beta
@@ -98,21 +99,32 @@ while running:
                 row_change = 3 * House._alpha
                 col_change = House._beta
                 battleground.action = 'HOUSE_MOVED'
+
+            # Pawn moving operations from top-right clockwise around the House
+            # e, d, c, z, a, q
+            elif event.key == pygame.K_e:
+                row_change = -3 * House._alpha
+                col_change = House._beta
+                battleground.action = 'PAWN_MOVED'
             elif event.key == pygame.K_d:
                 row_change = 0
                 col_change = 2 * House._beta
+                battleground.action = 'PAWN_MOVED'
+            elif event.key == pygame.K_c:
+                row_change = 3 * House._alpha
+                col_change = House._beta
+                battleground.action = 'PAWN_MOVED'
+            elif event.key == pygame.K_z:
+                row_change = 3 * House._alpha
+                col_change = -1 * House._beta
                 battleground.action = 'PAWN_MOVED'
             elif event.key == pygame.K_a:
                 row_change = 0
                 col_change = -2 * House._beta
                 battleground.action = 'PAWN_MOVED'
-            elif event.key == pygame.K_w:
+            elif event.key == pygame.K_q:
                 row_change = -3 * House._alpha
-                col_change = House._beta
-                battleground.action = 'PAWN_MOVED'
-            elif event.key == pygame.K_s:
-                row_change = 3 * House._alpha
-                col_change = House._beta
+                col_change = -1 * House._beta
                 battleground.action = 'PAWN_MOVED'
 
             # check the battleground actions
@@ -127,8 +139,9 @@ while running:
                 col_coor, row_coor = col_coor + col_change, row_coor + row_change
                 new_house = battleground.centre_coordinate_to_house_mapping.get((int(col_coor), int(row_coor)), current_house)
                 if new_house is not current_house and current_house.pawn is not None:
-                    current_house.pawn.house = new_house
                     new_house.pawn = current_house.pawn
+                    new_house.pawn.house = new_house
+                    new_house.pawn.icon_coordinates = new_house.icon_coordinates
                     current_house.pawn = None
 
             if battleground.action != 'BROWSE_NEIGHBORS':
