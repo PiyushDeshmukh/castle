@@ -21,6 +21,7 @@ class Pawn(pygame.sprite.Sprite):
         self.hidden = False
         self.ismine = True
         self.house = house
+        self.house.pawn = self
         self.battleground_attack = 0
         self.battleground_defense = 0
         self.image_file = self.get_icon_filename()
