@@ -3,9 +3,15 @@ import random
 from castle.kingdom.house import House
 
 class Maze:
-    def __init__(self):
+    def __init__(self, num_uniq_pawn_types):
         self.houses = []
         self.hexagon_central_coordinates = []
+
+        self.configuration_houses = []
+        self.configuration_houses_central_coordinates = []
+
+        self.num_uniq_pawn_types = num_uniq_pawn_types
+
 
     def get_house_generation_probability(self, col, row, num_rows, num_cols):
         """
@@ -44,6 +50,18 @@ class Maze:
                 row_coor = row_start + row*height_diff + 3*alpha
                 self.hexagon_central_coordinates.append((col_coor, row_coor))
 
+        min_col, _ = min(self.hexagon_central_coordinates, key=lambda x: x[0])
+        _, max_row = max(self.hexagon_central_coordinates, key=lambda x: x[1])
+        col_offset = beta
+        row_offset = 2 * alpha
+        print(min_col, max_row)
+        print(col_start, row_start)
+        for col in range(self.num_uniq_pawn_types):
+            col_coor = col_start + col*width_diff + col_offset
+            row_coor = row_start + (num_rows)*height_diff + row_offset
+            self.configuration_houses_central_coordinates.append((col_coor, row_coor))
+
+
     def get_all_houses(self):
         """
         Generates a maze of hexagons on basis of
@@ -54,13 +72,20 @@ class Maze:
             col_coor = coordinates[0]
             row_coor = coordinates[1]
             self.houses.append(House((col_coor, row_coor)))
-        return self.houses
+        for coordinates in self.configuration_houses_central_coordinates:
+            col_coor = coordinates[0]
+            row_coor = coordinates[1]
+            self.configuration_houses.append(House((col_coor, row_coor), is_configuration_house=True))
+
+        return self.houses, self.configuration_houses
 
     def discover_all_neighbors(self, bt_instance):
         """
         Populates the neighbor attributes of all Houses
         """
         for house in self.houses:
+            house.discover_neighbors(bt_instance)
+        for house in self.configuration_houses:
             house.discover_neighbors(bt_instance)
 
 def get_alpha_beta_from_height(height):

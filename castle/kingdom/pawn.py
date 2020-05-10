@@ -2,14 +2,16 @@ import pygame
 from castle.kingdom.person import Person
 from castle.kingdom.thing import Thing
 
+
 class Pawn(pygame.sprite.Sprite):
     """
     Pawn can be of 2 categories: Person or Thing
     """
-    def __init__(self, value, house):
+    def __init__(self, pawn_id, value, house):
         """
         `value` should be Thing or Person object
         """
+        self.pawn_id = pawn_id
         super(Pawn, self).__init__()
         if isinstance(value, Person):
             self.category = Person
@@ -21,7 +23,10 @@ class Pawn(pygame.sprite.Sprite):
         self.hidden = False
         self.ismine = True
         self.house = house
-        self.house.pawn = self
+        if self.house.is_configuration_house:
+            self.house.add_pawn(self)
+        else:
+            self.house.pawn = self
         self.battleground_attack = 0
         self.battleground_defense = 0
         self.image_file = self.get_icon_filename()
@@ -51,3 +56,6 @@ class Pawn(pygame.sprite.Sprite):
 
     def is_clicked(self):
         return pygame.mouse.get_pressed()[0] and self.rect.collidepoint(pygame.mouse.get_pos())
+
+    def __repr__(self):
+        return "<Pawn( at " + str(self.house) + ")>"

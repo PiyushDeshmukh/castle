@@ -1,71 +1,134 @@
 {
     "ranks": [
-                {
-                    "rank": 0,
-                    "titles": ["Joker"],
-                    "count": 2
-                }
-                {
-                    "rank": 1,
-                    "titles": ["Emperor", "Empress"],
-                    "count": 2
-                },
-                {
-                    "rank": 2,
-                    "titles": ["High King", "High Queen"],
-                    "count": 2
-                },
-                {
-                    "rank": 3,
-                    "titles": ["King", "Queen"]
-                },
-                {
-                    "rank": 4,
-                    "titles": ["Archduke", "Archduchess"]
-                },
-                {
-                    "rank": 5,
-                    "titles": ["Grand Prince", "Grand Princess"]
-                },
-                {
-                    "rank": 6,
-                    "titles": ["Infante", "Infanta"]
-                },
-                {
-                    "rank": 7,
-                    "titles": ["Herzon", "Knyaz"]
-                },
-                {
-                    "rank": 8,
-                    "titles": ["Furst", "Furstin"]
-                },
-                {
-                    "rank": 9,
-                    "titles": ["Marcus", "Marchioness"]
-                },
-                {
-                    "rank": 10,
-                    "titles": ["Earl", "Graf"]
-                },
-                {
-                    "rank": 11,
-                    "titles": ["Viscount", "Viscountess"]
-                },
-                {
-                    "rank": 12,
-                    "titles": ["Baron", "Baroness"]
-                },
-                {
-                    "rank": 13,
-                    "titles": ["Baronet", "Baronetess"]
-                },
-                {
-                    "rank": 14,
-                    "titles": ["Knight", "Dame", "Lord", "Lady"]
-                },
-                {
-                    "rank": 15,
-                    "titles": ["Esquire", "Gentleman", "Edler", "Maid", "Ministerialis"]
-                }
-            ]
+        {
+            "rank": 0,
+            "titles": [
+                "Joker"
+            ],
+            "counts": 2
+        },
+        {
+            "rank": 1,
+            "titles": [
+                "Emperor",
+                "Empress"
+            ],
+            "counts": 2
+        },
+        {
+            "rank": 2,
+            "titles": [
+                "High King",
+                "High Queen"
+            ],
+            "counts": 2
+        },
+        {
+            "rank": 3,
+            "titles": [
+                "King",
+                "Queen"
+            ],
+            "counts": 2
+        },
+        {
+            "rank": 4,
+            "titles": [
+                "Archduke",
+                "Archduchess"
+            ],
+            "counts": 2
+        },
+        {
+            "rank": 5,
+            "titles": [
+                "Grand Prince",
+                "Grand Princess"
+            ],
+            "counts": 3
+        },
+        {
+            "rank": 6,
+            "titles": [
+                "Infante",
+                "Infanta"
+            ],
+            "counts": 3
+        },
+        {
+            "rank": 7,
+            "titles": [
+                "Herzon",
+                "Knyaz"
+            ],
+            "counts": 3
+        },
+        {
+            "rank": 8,
+            "titles": [
+                "Furst",
+                "Furstin"
+            ],
+            "counts": 3
+        },
+        {
+            "rank": 9,
+            "titles": [
+                "Marcus",
+                "Marchioness"
+            ],
+            "counts": 3
+        },
+        {
+            "rank": 10,
+            "titles": [
+                "Earl",
+                "Graf"
+            ],
+            "counts": 4
+        },
+        {
+            "rank": 11,
+            "titles": [
+                "Viscount",
+                "Viscountess"
+            ],
+            "counts": 4
+        },
+        {
+            "rank": 12,
+            "titles": [
+                "Baron",
+                "Baroness"
+            ],
+            "counts": 7
+        },
+        {
+            "rank": 13,
+            "titles": [
+                "Baronet",
+                "Baronetess"
+            ],
+            "counts": 10
+        },
+        {
+            "rank": 14,
+            "titles": [
+                "Knight",
+                "Dame",
+                "Lord",
+                "Lady"
+            ],
+            "counts": 35
+        },
+        {
+            "rank": 15,
+            "titles": [
+                "Esquire",
+                "Edler",
+                "Ministerialis"
+            ],
+            "counts": 15
+        }
+    ]
 }

@@ -18,8 +18,12 @@ class House:
         (-1 * _beta, -1 * _alpha),
     ]
 
-    def __init__(self, centre_coordinates):
+    def __init__(self, centre_coordinates, is_configuration_house=False):
         self.centre_coordinates = centre_coordinates
+        self.is_configuration_house = is_configuration_house
+        if self.is_configuration_house:
+            self.pawns = list()
+            self.pawn_count = 0
         self.icon_coordinates = centre_coordinates[0]-15, centre_coordinates[1]-15
         self.vertex_coordinates = list()
         for point in type(self)._vertices:
@@ -28,6 +32,30 @@ class House:
             self.vertex_coordinates.append((col_coor, row_coor))
         self._neighbors = list()
         self.pawn = None
+
+    def get_pawn(self):
+        """
+        If this is configuration house, return the pawn it contains
+        """
+        if self.is_configuration_house:
+            if self.pawn_count == 0:
+                return None
+            else:
+                self.pawn_count -= 1
+                return self.pawns.pop()
+        return None
+
+    def add_pawn(self, pawn):
+        """
+        If this is a configuration house, add a pawn to it
+        """
+        print("add_pawn called")
+        if self.is_configuration_house and pawn is not None:
+            self.pawns.append(pawn)
+            self.pawn_count += 1
+            return True
+        return False
+
 
     def calculate_neighbor_coords(self):
         """
@@ -57,7 +85,21 @@ class House:
                 self._neighbors.remove(neighbor)
         else:
             raise Exception("Generate centre_coordinate_to_house_mapping before building valid neighbors list")
+
+        if hasattr(bt_instance, 'centre_coordinate_to_conf_house_mapping'):
+            invalid_neighbor = list()
+            for neighbor in self._neighbors:
+                col_coor, row_coor = neighbor
+                col_coor, row_coor = int(col_coor), int(row_coor)
+                if (col_coor, row_coor) not in bt_instance.centre_coordinate_to_conf_house_mapping:
+                    invalid_neighbor.append(neighbor)
+            for neighbor in invalid_neighbor:
+                self._neighbors.remove(neighbor)
+        else:
+            raise Exception("Generate centre_coordinate_to_house_mapping before building valid neighbors list")
+
+
         self.neighbors = cycle(self._neighbors)
 
     def __repr__(self):
-        return "<House(centre_coordinates=)>" + str(self.centre_coordinates)
+        return "<House(centre_coordinates=" + str(self.centre_coordinates) + ")>"
